@@ -35,4 +35,72 @@ img{
 button{
   border:none;
   padding:12px 18px;
-  margin:1
+  margin:10px;
+  font-size:16px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+#yes{ background:#ff4d88; color:white; }
+#no{ background:#ddd; position:absolute; }
+
+.heart{
+  position:fixed;
+  bottom:-40px;
+  font-size:22px;
+  animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp{
+  from{ transform:translateY(0); opacity:1;}
+  to{ transform:translateY(-120vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2 id="title">Will you be my Valentine? 💖</h2>
+
+<img id="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+
+<br>
+
+<button id="yes">Yes 💕</button>
+<button id="no">No 😢</button>
+</div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const gif = document.getElementById("gif");
+const title = document.getElementById("title");
+
+function moveNo(){
+  const x = Math.random()*250;
+  const y = Math.random()*200;
+  no.style.left = x + "px";
+  no.style.top = y + "px";
+}
+
+no.addEventListener("mouseover", moveNo);
+no.addEventListener("touchstart", moveNo);
+
+yes.onclick = () => {
+  gif.src = "https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif";
+  title.textContent = "YAY!!! You said YES 💘";
+
+  for(let i=0;i<20;i++){
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),2000);
+  }
+};
+</script>
+
+</body>
+</html>
